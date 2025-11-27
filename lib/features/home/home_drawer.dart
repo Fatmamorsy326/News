@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news/core/resources/colors_manager.dart';
 import 'package:news/providers/config_provider.dart';
+import 'package:news/providers/home_view_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -10,6 +11,7 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var homeProvider=Provider.of<HomeViewProvider>(context);
     var configProvider=Provider.of<ConfigProvider>(context);
     return Drawer(
       backgroundColor: ColorsManager.black,
@@ -31,7 +33,8 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-
+                    homeProvider.goToCategoriesView();
+                    Navigator.pop(context);
                   },
                   child: Row(
                     children: [

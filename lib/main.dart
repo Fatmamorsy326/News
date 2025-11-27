@@ -6,15 +6,16 @@ import 'package:news/core/Routes_manager/app_routes.dart';
 import 'package:news/core/Routes_manager/routes_manager.dart';
 import 'package:news/core/prefs_manager/prefs_manager.dart';
 import 'package:news/providers/config_provider.dart';
+import 'package:news/providers/home_view_provider.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefsManager.init();
-  return runApp(ChangeNotifierProvider(
-    create:(context) => ConfigProvider() ,
-    child: News(),
-  ));
+  return runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => ConfigProvider()),
+    ChangeNotifierProvider(create: (context) => HomeViewProvider()),
+  ],child: News(),));
 }
 
 class News extends StatelessWidget{

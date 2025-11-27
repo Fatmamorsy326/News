@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/features/home/categories_view/category_item.dart';
 import 'package:news/models/category_model.dart';
+import 'package:news/providers/home_view_provider.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesView extends StatelessWidget {
    const CategoriesView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var homeProvider=Provider.of<HomeViewProvider>(context);
     return Padding(
       padding: REdgeInsets.symmetric(horizontal: 15,vertical: 15),
       child: Column(
@@ -19,6 +22,7 @@ class CategoriesView extends StatelessWidget {
               padding: EdgeInsets.zero,
               itemBuilder: (context, index) => InkWell(
                   onTap: () {
+                    homeProvider.goToSourceView(CategoryModel.categories[index]);
                   },
                   child: CategoryItem(category: CategoryModel.categories[index])),
               separatorBuilder: (context, index) => SizedBox(height: 16.h,),
