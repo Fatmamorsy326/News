@@ -1,219 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news/api/api_services.dart';
+import 'package:news/api/models/sources_response/Source.dart';
 import 'package:news/features/home/source_view/article_item.dart';
-import 'package:news/models/article_model.dart';
-import 'package:news/models/source_model.dart';
+import 'package:news/features/home/source_view/source_view_model.dart';
+import 'package:news/models/category_model.dart';
+import 'package:provider/provider.dart';
 
-class SourceView extends StatelessWidget {
-   SourceView({super.key});
+class SourceView extends StatefulWidget {
+  CategoryModel category;
+   SourceView({super.key,required this.category});
 
-List<SourceModel> sources=[
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-  SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-];
-List<ArticleModel> articles=[
-  ArticleModel(
-      source:SourceModel(id: "argaam",
-      name: "Argaam",
-      description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-      url: "https://www.argaam.com",
-      category: "business",
-      language: "ar",
-      country: "sa"),
-      description:"asdfghj" ,
-      title: "40-year-old man falls 200 feet to his death while canyoneering at national park",
-      author: "By : Jon Haworth,",
-      content:"dfghjm," ,
-      publishedAt: "15 minutes ago",
-      url: "https://abcnews.go.com/US/epstein-alleged-victims-lawyer-sends-scathing-letter-doj/story?id\\\\u003d127907683",
-      urlToImage:"https://www.politico.com/dims4/default/resize/1200/quality/90/format/jpg?url=https%3A%2F%2Fstatic.politico.com%2Fd8%2F77%2F689cf1054421aafa8a8228245780%2Fmain-wu-brakkton-demssedition.jpg" ),
-  ArticleModel(
-      source:SourceModel(id: "argaam",
-          name: "Argaam",
-          description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-          url: "https://www.argaam.com",
-          category: "business",
-          language: "ar",
-          country: "sa"),
-      description:"asdfghj" ,
-      title: "40-year-old man falls 200 feet to his death while canyoneering at national park",
-      author: "By : Jon Haworth,",
-      content:"dfghjm," ,
-      publishedAt: "15 minutes ago",
-      url: "https://abcnews.go.com/US/epstein-alleged-victims-lawyer-sends-scathing-letter-doj/story?id\\\\u003d127907683",
-      urlToImage:"https://www.politico.com/dims4/default/resize/1200/quality/90/format/jpg?url=https%3A%2F%2Fstatic.politico.com%2Fd8%2F77%2F689cf1054421aafa8a8228245780%2Fmain-wu-brakkton-demssedition.jpg" ),
-  ArticleModel(
-      source:SourceModel(id: "argaam",
-          name: "Argaam",
-          description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-          url: "https://www.argaam.com",
-          category: "business",
-          language: "ar",
-          country: "sa"),
-      description:"asdfghj" ,
-      title: "40-year-old man falls 200 feet to his death while canyoneering at national park",
-      author: "By : Jon Haworth,",
-      content:"dfghjm," ,
-      publishedAt: "15 minutes ago",
-      url: "https://abcnews.go.com/US/epstein-alleged-victims-lawyer-sends-scathing-letter-doj/story?id\\\\u003d127907683",
-      urlToImage:"https://www.politico.com/dims4/default/resize/1200/quality/90/format/jpg?url=https%3A%2F%2Fstatic.politico.com%2Fd8%2F77%2F689cf1054421aafa8a8228245780%2Fmain-wu-brakkton-demssedition.jpg" ),
-  ArticleModel(
-      source:SourceModel(id: "argaam",
-          name: "Argaam",
-          description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-          url: "https://www.argaam.com",
-          category: "business",
-          language: "ar",
-          country: "sa"),
-      description:"asdfghj" ,
-      title: "40-year-old man falls 200 feet to his death while canyoneering at national park",
-      author: "By : Jon Haworth,",
-      content:"dfghjm," ,
-      publishedAt: "15 minutes ago",
-      url: "https://abcnews.go.com/US/epstein-alleged-victims-lawyer-sends-scathing-letter-doj/story?id\\\\u003d127907683",
-      urlToImage:"https://www.politico.com/dims4/default/resize/1200/quality/90/format/jpg?url=https%3A%2F%2Fstatic.politico.com%2Fd8%2F77%2F689cf1054421aafa8a8228245780%2Fmain-wu-brakkton-demssedition.jpg" ),
-  ArticleModel(
-      source:SourceModel(id: "argaam",
-          name: "Argaam",
-          description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-          url: "https://www.argaam.com",
-          category: "business",
-          language: "ar",
-          country: "sa"),
-      description:"asdfghj" ,
-      title: "40-year-old man falls 200 feet to his death while canyoneering at national park",
-      author: "By : Jon Haworth,",
-      content:"dfghjm," ,
-      publishedAt: "15 minutes ago",
-      url: "https://abcnews.go.com/US/epstein-alleged-victims-lawyer-sends-scathing-letter-doj/story?id\\\\u003d127907683",
-      urlToImage:"https://www.politico.com/dims4/default/resize/1200/quality/90/format/jpg?url=https%3A%2F%2Fstatic.politico.com%2Fd8%2F77%2F689cf1054421aafa8a8228245780%2Fmain-wu-brakkton-demssedition.jpg" ),
-  ArticleModel(
-      source:SourceModel(id: "argaam",
-          name: "Argaam",
-          description: "ارقام موقع متخصص في متابعة سوق الأسهم السعودي تداول - تاسي - مع تغطيه معمقة لشركات واسعار ومنتجات البتروكيماويات , تقارير مالية الاكتتابات الجديده ",
-          url: "https://www.argaam.com",
-          category: "business",
-          language: "ar",
-          country: "sa"),
-      description:"asdfghj" ,
-      title: "40-year-old man falls 200 feet to his death while canyoneering at national park",
-      author: "By : Jon Haworth,",
-      content:"dfghjm," ,
-      publishedAt: "15 minutes ago",
-      url: "https://abcnews.go.com/US/epstein-alleged-victims-lawyer-sends-scathing-letter-doj/story?id\\\\u003d127907683",
-      urlToImage:"https://www.politico.com/dims4/default/resize/1200/quality/90/format/jpg?url=https%3A%2F%2Fstatic.politico.com%2Fd8%2F77%2F689cf1054421aafa8a8228245780%2Fmain-wu-brakkton-demssedition.jpg" ),
-];
+  @override
+  State<SourceView> createState() => _SourceViewState();
+}
+
+class _SourceViewState extends State<SourceView> {
+  late SourceViewModel sourceViewModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    sourceViewModel=SourceViewModel();
+    sourceViewModel.loadSources(widget.category);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        DefaultTabController(
-          length: sources.length,
-            child: TabBar(
-              isScrollable: true,
-                tabAlignment: TabAlignment.start,
-                dividerColor: Colors.transparent,
-                indicatorColor: Theme.of(context).colorScheme.secondary,
-                labelStyle:GoogleFonts.inter(fontSize:16.sp ,fontWeight:FontWeight.w700 ,color: Theme.of(context).colorScheme.secondary),
-                unselectedLabelStyle: GoogleFonts.inter(fontSize:14.sp ,fontWeight:FontWeight.w500 ,color: Theme.of(context).colorScheme.secondary),
-                tabs:sources.map((e) => Tab(text: e.name,)).toList()
-            )
-        ),
-        SizedBox(
-          height: 16.h,
-        ),
-        Expanded(child: Padding(
-          padding:  REdgeInsets.symmetric(horizontal: 16),
-          child: ListView.separated(
-            itemCount: articles.length,
-            itemBuilder: (context, index) => ArticleItem(article: articles[index]),
-            separatorBuilder: (context, index) => SizedBox(height: 16.h,),
+    return ChangeNotifierProvider.value(
+      value: sourceViewModel,
+      child: Column(
+        children: [
+          Consumer<SourceViewModel>(
+            builder: (context, sourceViewModel, child){
+              if(sourceViewModel.loading){
+                return Center(child: CircularProgressIndicator());
+              }
+              if(sourceViewModel.errorMessage!=null){
+                return Center(child: Text(sourceViewModel.errorMessage!,style: Theme.of(context).textTheme.labelMedium,));
+              }
+              if(sourceViewModel.sources.isNotEmpty){
+                return DefaultTabController(
+                    length: sourceViewModel.sources.length,
+                    child: TabBar(
+                        isScrollable: true,
+                        tabAlignment: TabAlignment.start,
+                        dividerColor: Colors.transparent,
+                        indicatorColor: Theme.of(context).colorScheme.secondary,
+                        labelStyle:GoogleFonts.inter(fontSize:16.sp ,fontWeight:FontWeight.w700 ,color: Theme.of(context).colorScheme.secondary),
+                        unselectedLabelStyle: GoogleFonts.inter(fontSize:14.sp ,fontWeight:FontWeight.w500 ,color: Theme.of(context).colorScheme.secondary),
+                        tabs:sourceViewModel.sources.map((source) => Tab(text: source.name,)).toList()
+                    )
+                );
+              }
+              return Center(child: Text("No Sources Found"));
+            },
           ),
-        )),
-      ],
+        ],
+      ),
     );
   }
 }

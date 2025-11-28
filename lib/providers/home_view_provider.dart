@@ -9,11 +9,12 @@ class HomeViewProvider extends ChangeNotifier {
 
   void goToCategoriesView(){
     homeView=CategoriesView();
+    homeTitle="Home";
     notifyListeners();
   }
 
   void goToSourceView(CategoryModel category) {
-    homeView = SourceView();
+    homeView = SourceView(category: category,);
     homeTitle = category.title;
     notifyListeners();
   }
