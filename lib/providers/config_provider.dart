@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:news/core/prefs_manager/prefs_manager.dart';
 
 class ConfigProvider extends ChangeNotifier {
-  ThemeMode currentTheme = PrefsManager.getMode()?? ThemeMode.light;
+  ThemeMode currentTheme = PrefsManager.getMode()?? ThemeMode.dark;
   void changeTheme(ThemeMode newTheme){
     if(currentTheme!=newTheme){
       currentTheme=newTheme;

@@ -3,7 +3,10 @@ import 'Source.dart';
 class SourcesResponse {
   SourcesResponse({
       this.status, 
-      this.sources,});
+      this.sources,
+    this.code,
+    this.message
+  });
 
   SourcesResponse.fromJson(dynamic json) {
     status = json['status'];

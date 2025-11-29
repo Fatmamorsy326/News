@@ -40,6 +40,7 @@ dependencies:
   provider: ^6.1.5+1
   http: ^1.6.0
   dartz: ^0.10.1
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
