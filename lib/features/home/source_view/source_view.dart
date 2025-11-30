@@ -49,38 +49,40 @@ class _SourceViewState extends State<SourceView> {
         children: [
           Consumer<SourceViewModel>(
             builder: (context, sourceViewModel, child) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(8.w),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.secondary,
-                        width: 1,
-                      ),
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        if (sourceViewModel.sources.isNotEmpty) {
-                          showSearch(
-                            context: context,
-                            delegate: ArticleSearchDelegate(
-                              articleViewModel,
-                              sourceViewModel.sources[currentTabIndex],
-                            ),
-                          );
-                        }
-                      },
-                      icon: Icon(
+              return Container(
+                margin: EdgeInsets.all(8.w),
+                padding: REdgeInsets.symmetric(horizontal: 8,vertical: 8),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.secondary,
+                    width: 1,
+                  ),
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    if (sourceViewModel.sources.isNotEmpty) {
+                      showSearch(
+                        context: context,
+                        delegate: ArticleSearchDelegate(
+                          articleViewModel,
+                          sourceViewModel.sources[currentTabIndex],
+                        ),
+                      );
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(child: Text("Search")),
+                      // Spacer(),
+                      Icon(
                         Icons.search,
                         color: Theme.of(context).colorScheme.secondary,
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               );
             },
           ),
