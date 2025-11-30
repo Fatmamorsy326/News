@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news/data/api/api_services.dart';
+import 'package:news/data/data_sources/article_api_remote_DS.dart';
+import 'package:news/data/data_sources/sources_api_remote_DS.dart';
+import 'package:news/data/repositories_impl/article_repo_impl.dart';
+import 'package:news/data/repositories_impl/sources_repo_impl.dart';
+import 'package:news/features/home/search/article_search_delegate.dart';
 import 'package:news/features/home/source_view/article_item.dart';
 import 'package:news/features/home/source_view/article_view_model.dart';
 import 'package:news/features/home/source_view/source_view_model.dart';
@@ -18,6 +24,7 @@ class SourceView extends StatefulWidget {
 class _SourceViewState extends State<SourceView> {
   late SourceViewModel sourceViewModel;
   late ArticleViewModel articleViewModel;
+  int currentTabIndex = 0;
 
   @override
   void initState() {
@@ -26,10 +33,10 @@ class _SourceViewState extends State<SourceView> {
     super.initState();
   }
   void fetchData()async{
-    sourceViewModel=SourceViewModel();
-    articleViewModel=ArticleViewModel();
+    sourceViewModel=SourceViewModel(sourcesRepository: SourcesRepoImpl(SourcesApiRemoteDs(ApiServices())));
+    articleViewModel=ArticleViewModel(articleRepository: ArticleRepoImpl(articleRemoteDs: ArticleApiRemoteDs(apiServices: ApiServices())));
     await sourceViewModel.loadSources(widget.category);
-    await articleViewModel.loadArticles(sourceViewModel.sources[0]);
+    await articleViewModel.loadArticles(sourceViewModel.sources[currentTabIndex]);
   }
 
   @override
@@ -40,6 +47,43 @@ class _SourceViewState extends State<SourceView> {
     ],
       child: Column(
         children: [
+          Consumer<SourceViewModel>(
+            builder: (context, sourceViewModel, child) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(8.w),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.secondary,
+                        width: 1,
+                      ),
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        if (sourceViewModel.sources.isNotEmpty) {
+                          showSearch(
+                            context: context,
+                            delegate: ArticleSearchDelegate(
+                              articleViewModel,
+                              sourceViewModel.sources[currentTabIndex],
+                            ),
+                          );
+                        }
+                      },
+                      icon: Icon(
+                        Icons.search,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
           Consumer<SourceViewModel>(
             builder: (context, sourceViewModel, child){
               if(sourceViewModel.loading){
@@ -56,6 +100,7 @@ class _SourceViewState extends State<SourceView> {
                   child: TabBar(
                       onTap: (index) {
                         articleViewModel.loadArticles(sourceViewModel.sources[index]);
+                        currentTabIndex=index;
                       },
                       isScrollable: true,
                       tabAlignment: TabAlignment.start,

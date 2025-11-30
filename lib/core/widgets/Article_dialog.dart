@@ -2,26 +2,25 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news/core/resources/colors_manager.dart';
-import 'package:news/core/widgets/Article_dialog.dart';
 import 'package:news/data/api/models/article_response/Article.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ArticleItem extends StatelessWidget {
-  Article article;
-  ArticleItem({super.key,required this.article});
+class ArticleDialog extends StatelessWidget {
+   Article article;
+   ArticleDialog({super.key,required this.article});
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        showDialog(context: context, builder: (context) => ArticleDialog(article: article),);
-      },
+    return Dialog(
       child: Container(
         padding: REdgeInsets.symmetric(horizontal: 8,vertical: 8),
         decoration: BoxDecoration(
           border: Border.all(width: 1.w,color: Theme.of(context).colorScheme.secondary),
           borderRadius: BorderRadius.circular(16.r),
+          color: Theme.of(context).colorScheme.secondary,
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
@@ -36,20 +35,27 @@ class ArticleItem extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
-            Text(article.title??'',style: Theme.of(context).textTheme.labelMedium,),
+            Text(article.description??'',style: GoogleFonts.inter(color:Theme.of(context).primaryColor ,fontWeight: FontWeight.w500,fontSize:14.sp,letterSpacing: -0.4,height: 1.5),maxLines: 5,overflow: TextOverflow.ellipsis,),
             SizedBox(
               height: 10.h,
             ),
-            Row(
-              children: [
-                Expanded(child: Text("By: ${article.author??'Unknown'}",style: GoogleFonts.inter(color: ColorsManager.gray,fontWeight:FontWeight.w500 ,fontSize: 12.sp))),
-                Spacer(),
-                Expanded(child: Text(article.publishedAt??'',style: GoogleFonts.inter(color: ColorsManager.gray,fontWeight:FontWeight.w500 ,fontSize: 12.sp),)),
-              ],
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(onPressed: (){
+                _launchURL(article.url??'');
+              }, child: Text("View Full Articel",style: Theme.of(context).textTheme.labelMedium,)),
             )
+
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _launchURL(String articleUrl) async {
+    final Uri url = Uri.parse(articleUrl);
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $url';
+    }
   }
 }

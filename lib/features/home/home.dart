@@ -23,9 +23,6 @@ class _HomeState extends State<Home> {
         foregroundColor: Theme.of(context).colorScheme.secondary,
         title: Text(homeProvider.homeTitle,style: Theme.of(context).textTheme.titleSmall,),
         centerTitle: true,
-        actions: [
-          Icon(Icons.search,color: Theme.of(context).colorScheme.secondary,weight: 24.sp,),
-        ],
       ),
       drawer: HomeDrawer(),
       body: homeProvider.homeView,

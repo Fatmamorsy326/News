@@ -1,4 +1,4 @@
-import 'package:news/api/models/sources_response/Source.dart';
+import 'package:news/data/api/models/sources_response/Source.dart';
 class Article {
   Article({
       this.source, 

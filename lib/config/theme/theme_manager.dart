@@ -17,6 +17,16 @@ class ThemeManager {
       bodyMedium: GoogleFonts.inter(color:ColorsManager.white ,fontWeight: FontWeight.w700,fontSize:20.sp ),
       labelMedium: GoogleFonts.inter(color:ColorsManager.black ,fontWeight: FontWeight.w700,fontSize:16.sp ),
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: ColorsManager.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(16.r),
+            ),
+            padding: REdgeInsets.symmetric(vertical: 16,horizontal: 16),
+            foregroundColor: ColorsManager.black,
+        )
+    ),
   );
 
 
@@ -35,6 +45,16 @@ class ThemeManager {
       bodyMedium: GoogleFonts.inter(color:ColorsManager.white ,fontWeight: FontWeight.w700,fontSize:20.sp ),
       labelMedium: GoogleFonts.inter(color:ColorsManager.white ,fontWeight: FontWeight.w700,fontSize:16.sp ),
 
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: ColorsManager.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.circular(16.r),
+          ),
+          padding: REdgeInsets.symmetric(vertical: 16,horizontal: 16),
+          foregroundColor: ColorsManager.white,
+        )
     ),
   );
 }
