@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news/core/resources/colors_manager.dart';
 import 'package:news/core/widgets/Article_dialog.dart';
+import 'package:news/core/widgets/article_bottom_sheet.dart';
 import 'package:news/data/api/models/article_response/Article.dart';
 
 class ArticleItem extends StatelessWidget {
@@ -13,7 +14,8 @@ class ArticleItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        showDialog(context: context, builder: (context) => ArticleDialog(article: article),);
+        // showDialog(context: context, builder: (context) => ArticleDialog(article: article),);
+        showModalBottomSheet(context: context, builder: (context) => ArticleBottomSheet(article: article),);
       },
       child: Container(
         padding: REdgeInsets.symmetric(horizontal: 8,vertical: 8),
